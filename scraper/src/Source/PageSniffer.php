@@ -22,6 +22,7 @@ class PageSniffer
         'isNewsPage',
         'isUnwantedPage',
         'isDisciplinaryStatementsPage',
+        'isAdvisoryCommitteePage',
     ];
 
     /**
@@ -67,5 +68,10 @@ class PageSniffer
             stripos($this->resource->meta['title'], 'Disciplinary statements') !== false &&
             stripos($this->resource->meta['title'], 'Publication Policy') === false
         );
+    }
+
+    public function getIsAdvisoryCommitteePage()
+    {
+        return ($this->resource->relativeUrl == 'contact-advisory-committee.htm');
     }
 }
