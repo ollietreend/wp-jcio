@@ -18,7 +18,7 @@ class TextHelper
         $output = html_entity_decode($output);
 
         // Replace multiple spaces with single spaces
-        $output = preg_replace('/\s+/', ' ', $output);
+        $output = preg_replace('/\h+/', ' ', $output);
 
         // Trip the string for whitespace
         $output = trim($output);
