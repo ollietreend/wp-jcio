@@ -1,9 +1,15 @@
 <?php
-
 /**
  * Import script
  */
 
+// Ensure that this script is being called via WP-CLI
+if (!defined('WP_CLI') || !WP_CLI) {
+    echo "Please do not run this script directly. Use import.sh instead.\n";
+    die(1);
+}
+
+// Include composer autoloader
 require 'vendor/autoload.php';
 
 // Setup environment variables
@@ -20,33 +26,28 @@ date_default_timezone_set('Europe/London');
 // Set page time limit
 set_time_limit(0);
 
-// Includes
-//require '../wp-load.php';
-//require '../wp-admin/includes/image.php';
-//require '../wp-admin/includes/file.php';
-//require '../wp-admin/includes/media.php';
+use Scraper\Source\Spider;
+use Scraper\Source\ContentLister\PageList;
+use Scraper\Source\ContentLister\NewsPostList;
+use Scraper\Source\ContentLister\DisciplinaryStatementList;
+use Scraper\Source\ContentLister\AdvisoryCommitteeList;
+use Scraper\Import\BaseImporter;
+use Scraper\Import\NewsPostImporter;
 
 // Configure filesystem cache
 FileSystemCache::$cacheDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'cache';
 
-$resources = \Scraper\Source\Spider::createCollectionFromUrl($_ENV['IMPORT_URL']);
+// Configure importers
+BaseImporter::$authorId = 2;
+BaseImporter::$skipExisting = true;
 
-//$pages = \Scraper\Source\ContentLister\PageList::getList($resources);
-//$news = \Scraper\Source\ContentLister\NewsPostList::getList($resources);
-$statements = \Scraper\Source\ContentLister\DisciplinaryStatementList::getList($resources);
+$resources = Spider::createCollectionFromUrl($_ENV['IMPORT_URL']);
 
-/*foreach ($resources as $resource) {
-    if (!file_exists($resource->getFilePath())) {
-        echo $resource->getFilePath() . "\n";
-    }
-}*/
+//$pages = PageList::getList($resources);
+$news = NewsPostList::getList($resources);
+//$statements = DisciplinaryStatementList::getList($resources);
+//$committees = AdvisoryCommitteeList::getList($resources);
 
-//$doPages = array_map(function($page) {
-//    return $page->resource->relativeUrl;
-//}, $pages);
+NewsPostImporter::importMany($news);
 
-foreach ($statements as $statement) {
-    echo $statement->date->format('Y-m-d H:i:s') . "\n";
-}
-
-eval(\Psy\sh());
+//eval(\Psy\sh());

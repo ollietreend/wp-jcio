@@ -66,6 +66,7 @@ class NewsPostList
 
         $title = TextHelper::tidyText($matches[4]);
 
+        $html = utf8_decode($html);
         $content = preg_replace('/^.*?<\/strong>/i', '', $html);
         $content = preg_replace('/<(\/?)(dt|dd).*?>/i', '<$1p>', $content);
         $content = TextHelper::tidyHtml($content);
