@@ -19,6 +19,7 @@ class PageSniffer
      */
     protected $lazyProperties = [
         'pageHasHeader',
+        'isHomepage',
         'isNewsPage',
         'isUnwantedPage',
         'isDisciplinaryStatementsPage',
@@ -47,6 +48,11 @@ class PageSniffer
         $crawler = $this->resource->getCrawler();
         $header = $crawler->filter('#header');
         return (count($header) > 0);
+    }
+
+    public function getIsHomepage()
+    {
+        return ($this->resource->relativeUrl == 'index.htm');
     }
 
     public function getIsNewsPage()

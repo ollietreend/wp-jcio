@@ -38,7 +38,6 @@ class PageList
     {
         $sniffer = $resource->getPageSniffer();
         return (
-            !$sniffer->isNewsPage &&
             !$sniffer->isUnwantedPage &&
             !$sniffer->isDisciplinaryStatementsPage &&
             $sniffer->pageHasHeader

@@ -13,14 +13,11 @@ class NewsPostImporter extends BaseImporter
      * @param NewsPostEntity $entity
      * @return Post
      */
-    public static function import($entity)
+    public static function import(NewsPostEntity $entity)
     {
         echo "Importing news post: " . $entity->title . "\n";
 
-        $existingPost = Post::getByMeta([
-            'reddot_import' => 1,
-            'reddot_news_post_title' => $entity->title,
-        ]);
+        $existingPost = Post::getByMeta(static::getReddotMeta($entity));
 
         if ($existingPost) {
             if (static::$skipExisting) {
@@ -46,10 +43,15 @@ class NewsPostImporter extends BaseImporter
             'post_status' => 'publish',
             'post_type' => Post::$postType,
             'post_author' => static::$authorId,
-            'meta' => [
-                'reddot_import' => 1,
-                'reddot_news_post_title' => $entity->title,
-            ],
+            'meta' => static::getReddotMeta($entity),
+        ];
+    }
+
+    private static function getReddotMeta(NewsPostEntity $entity)
+    {
+        return [
+            'reddot_import' => 1,
+            'reddot_url' => $entity->resource->relativeUrl,
         ];
     }
 }

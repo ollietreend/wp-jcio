@@ -44,7 +44,7 @@ class PageEntity
         }
 
         // Remove unwanted elements from content
-        $content->filter('h1')->each(function($crawler) {
+        $content->filter('h1, #navBoxes')->each(function($crawler) {
             foreach ($crawler as $node) {
                 $node->parentNode->removeChild($node);
             }
@@ -52,6 +52,7 @@ class PageEntity
 
         // Filter and clean HTML
         $html = $content->html();
+        $html = utf8_decode($html);
         $html = TextHelper::tidyHtml($html);
 
         return $html;
