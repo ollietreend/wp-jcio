@@ -15,7 +15,7 @@ class NewsPostImporter extends BaseImporter
      */
     public static function import(NewsPostEntity $entity)
     {
-        echo "Importing news post: " . $entity->title . "\n";
+        echo $entity->title . "\n";
 
         $existingPost = Post::getByMeta(static::getReddotMeta($entity));
 

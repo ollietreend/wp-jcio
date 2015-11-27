@@ -20,7 +20,7 @@ class PageImporter extends BaseImporter
      */
     public static function import(PageEntity $entity)
     {
-        echo "Importing page: " . $entity->title . "\n";
+        echo $entity->title . "\n";
 
         $existingPost = Page::getByMeta(static::getReddotMeta($entity));
 

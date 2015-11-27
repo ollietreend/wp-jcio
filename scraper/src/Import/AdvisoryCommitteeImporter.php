@@ -15,7 +15,7 @@ class AdvisoryCommitteeImporter extends BaseImporter
      */
     public static function import(AdvisoryCommitteeEntity $entity)
     {
-        echo "Importing advisory committee: " . $entity->title . "\n";
+        echo $entity->title . "\n";
 
         $existingPost = AdvisoryCommittee::getByMeta(static::getReddotMeta($entity));
 

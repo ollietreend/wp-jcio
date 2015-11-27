@@ -34,6 +34,8 @@ use Scraper\Source\ContentLister\AdvisoryCommitteeList;
 use Scraper\Import\BaseImporter;
 use Scraper\Import\NewsPostImporter;
 use Scraper\Import\PageImporter;
+use Scraper\Import\AdvisoryCommitteeImporter;
+use Scraper\Import\DisciplinaryStatementImporter;
 
 // Configure filesystem cache
 FileSystemCache::$cacheDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'cache';
@@ -44,12 +46,42 @@ BaseImporter::$skipExisting = false;
 
 $resources = Spider::createCollectionFromUrl($_ENV['IMPORT_URL']);
 
+echo <<<EOF
+
++------------------------------------------------------------------------+
+| IMPORTING PAGES                                                        |
++------------------------------------------------------------------------+
+
+EOF;
 $pages = PageList::getList($resources);
-//$news = NewsPostList::getList($resources);
-//$statements = DisciplinaryStatementList::getList($resources);
-//$committees = AdvisoryCommitteeList::getList($resources);
-
 PageImporter::importMany($pages);
-//NewsPostImporter::importMany($news);
 
-//eval(\Psy\sh());
+echo <<<EOF
+
++------------------------------------------------------------------------+
+| IMPORTING NEWS POSTS                                                   |
++------------------------------------------------------------------------+
+
+EOF;
+$news = NewsPostList::getList($resources);
+NewsPostImporter::importMany($news);
+
+echo <<<EOF
+
++------------------------------------------------------------------------+
+| IMPORTING ADVISORY COMMITTEES                                          |
++------------------------------------------------------------------------+
+
+EOF;
+$committees = AdvisoryCommitteeList::getList($resources);
+AdvisoryCommitteeImporter::importMany($committees);
+
+echo <<<EOF
+
++------------------------------------------------------------------------+
+| IMPORTING DISCIPLINARY STATEMENTS                                      |
++------------------------------------------------------------------------+
+
+EOF;
+$statements = DisciplinaryStatementList::getList($resources);
+DisciplinaryStatementImporter::importMany($statements);

@@ -37,6 +37,36 @@ class Base {
     }
 
     /**
+     * Get media files which are attached to this post.
+     *
+     * @return Attachment[]
+     */
+    public function getAttachedMedia() {
+        $args = array(
+            'post_parent' => $this->WP_Post->ID,
+            'post_type' => 'attachment',
+            'posts_per_page' => -1,
+        );
+        $children = get_children($args);
+
+        $return = [];
+        foreach ($children as $child) {
+            $return[] = new Attachment($child);
+        }
+        return $return;
+    }
+
+    /**
+     * Delete all media files attached to this post.
+     */
+    public function deleteAttachedMedia() {
+        $attachedMedia = $this->getAttachedMedia();
+        foreach ($attachedMedia as $media) {
+            $media->delete();
+        }
+    }
+
+    /**
      * Update the post with the supplied data.
      *
      * @param $save
@@ -126,10 +156,10 @@ class Base {
             $meta = [];
         }
 
-        $save = array_merge($save, [
+        $save = array_merge([
             'post_type' => static::$postType,
             'post_status' => 'publish',
-        ]);
+        ], $save);
 
         $savedId = wp_insert_post($save, true);
 
