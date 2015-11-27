@@ -2,8 +2,11 @@
 
 namespace Scraper\Import;
 
+use Scraper\Import\PageVariations\AdvisoryCommitteePageVariations;
 use Scraper\Import\PageVariations\BasePageVariations;
+use Scraper\Import\PageVariations\ChecklistPageVariations;
 use Scraper\Import\PageVariations\HomePageVariations;
+use Scraper\Import\PageVariations\NewsPageVariations;
 use Scraper\Source\ContentEntity\PageEntity;
 use Scraper\WordPress\Post\Page;
 
@@ -55,13 +58,19 @@ class PageImporter extends BaseImporter
 
     private static function getSaveData(PageEntity $entity, BasePageVariations $variations = null)
     {
+        $meta = static::getReddotMeta($entity);
+
+        if ($variations->pageTemplate) {
+            $meta['_wp_page_template'] = $variations->pageTemplate . '.php';
+        }
+
         return [
             'post_title' => $entity->title,
-            'post_content' => $entity->content,
+            'post_content' => $variations->content,
             'post_status' => 'publish',
             'post_type' => Page::$postType,
             'post_author' => static::$authorId,
-            'meta' => static::getReddotMeta($entity),
+            'meta' => $meta,
         ];
     }
 
@@ -75,14 +84,16 @@ class PageImporter extends BaseImporter
 
     private static function getPageVariations(PageEntity $entity)
     {
-        $sniffer = $entity->resource->getPageSniffer();
+        $thePage = $entity->resource->getPageSniffer();
 
-        if ($sniffer->isHomepage) {
+        if ($thePage->isHomepage) {
             return new HomePageVariations($entity);
-//        } else if ($sniffer->isNewsPage) {
-//            return ;
-//        } else if ($sniffer->isAdvisoryCommitteePage) {
-//            return new
+        } else if ($thePage->isNewsPage) {
+            return new NewsPageVariations($entity);
+        } else if ($thePage->isAdvisoryCommitteePage) {
+            return new AdvisoryCommitteePageVariations($entity);
+        } else if ($thePage->hasAChecklist) {
+            return new ChecklistPageVariations($entity);
         } else {
             return new BasePageVariations($entity);
         }

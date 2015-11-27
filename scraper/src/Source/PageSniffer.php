@@ -24,6 +24,7 @@ class PageSniffer
         'isUnwantedPage',
         'isDisciplinaryStatementsPage',
         'isAdvisoryCommitteePage',
+        'hasAChecklist',
     ];
 
     /**
@@ -79,5 +80,12 @@ class PageSniffer
     public function getIsAdvisoryCommitteePage()
     {
         return ($this->resource->relativeUrl == 'contact-advisory-committee.htm');
+    }
+
+    public function getHasAChecklist()
+    {
+        $crawler = $this->resource->getCrawler();
+        $tickCross = $crawler->filter('.left-column .column-head-tick, .right-column .column-head-cross');
+        return (count($tickCross) == 2);
     }
 }

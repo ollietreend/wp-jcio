@@ -2,8 +2,6 @@
 
 namespace Scraper\Import\PageVariations;
 
-use Scraper\Source\ContentEntity\PageEntity;
-use Scraper\Utility\LazyProperties;
 use Scraper\Utility\TextHelper;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -15,6 +13,28 @@ class HomePageVariations extends BasePageVariations
      * @var bool
      */
     public $isFrontPage = true;
+
+    /**
+     * Page content to import.
+     *
+     * @return string
+     */
+    public function getContent() {
+        $content = new Crawler($this->entity->content);
+
+        // Remove unwanted elements from content
+        $content->filter('#navBoxes')->each(function($crawler) {
+            foreach ($crawler as $node) {
+                $node->parentNode->removeChild($node);
+            }
+        });
+
+        // Filter and clean HTML
+        $html = $content->html();
+        $html = TextHelper::tidyHtml($html);
+
+        return $html;
+    }
 
     /**
      * ACF fields to import.

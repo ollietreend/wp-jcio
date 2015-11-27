@@ -22,6 +22,7 @@ class BasePageVariations
      * @var array
      */
     protected $lazyProperties = [
+        'content',
         'acfFields',
     ];
 
@@ -59,6 +60,15 @@ class BasePageVariations
      */
     public function __construct(PageEntity $entity) {
         $this->entity = $entity;
+    }
+
+    /**
+     * Page content to import.
+     *
+     * @return string
+     */
+    public function getContent() {
+        return $this->entity->content;
     }
 
     /**

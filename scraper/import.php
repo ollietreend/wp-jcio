@@ -33,21 +33,23 @@ use Scraper\Source\ContentLister\DisciplinaryStatementList;
 use Scraper\Source\ContentLister\AdvisoryCommitteeList;
 use Scraper\Import\BaseImporter;
 use Scraper\Import\NewsPostImporter;
+use Scraper\Import\PageImporter;
 
 // Configure filesystem cache
 FileSystemCache::$cacheDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'cache';
 
 // Configure importers
 BaseImporter::$authorId = 2;
-BaseImporter::$skipExisting = true;
+BaseImporter::$skipExisting = false;
 
 $resources = Spider::createCollectionFromUrl($_ENV['IMPORT_URL']);
 
-//$pages = PageList::getList($resources);
-$news = NewsPostList::getList($resources);
+$pages = PageList::getList($resources);
+//$news = NewsPostList::getList($resources);
 //$statements = DisciplinaryStatementList::getList($resources);
 //$committees = AdvisoryCommitteeList::getList($resources);
 
-NewsPostImporter::importMany($news);
+PageImporter::importMany($pages);
+//NewsPostImporter::importMany($news);
 
 //eval(\Psy\sh());
