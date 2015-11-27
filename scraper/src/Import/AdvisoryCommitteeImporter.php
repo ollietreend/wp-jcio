@@ -2,22 +2,22 @@
 
 namespace Scraper\Import;
 
-use Scraper\Source\ContentEntity\NewsPostEntity;
-use Scraper\WordPress\Post\Post;
+use Scraper\Source\ContentEntity\AdvisoryCommitteeEntity;
+use Scraper\WordPress\Post\AdvisoryCommittee;
 
-class NewsPostImporter extends BaseImporter
+class AdvisoryCommitteeImporter extends BaseImporter
 {
     /**
      * Import the supplied content entities.
      *
-     * @param NewsPostEntity $entity
-     * @return Post
+     * @param AdvisoryCommitteeEntity $entity
+     * @return AdvisoryCommittee
      */
-    public static function import(NewsPostEntity $entity)
+    public static function import(AdvisoryCommitteeEntity $entity)
     {
-        echo "Importing news post: " . $entity->title . "\n";
+        echo "Importing advisory committee: " . $entity->title . "\n";
 
-        $existingPost = Post::getByMeta(static::getReddotMeta($entity));
+        $existingPost = AdvisoryCommittee::getByMeta(static::getReddotMeta($entity));
 
         if ($existingPost) {
             if (static::$skipExisting) {
@@ -30,24 +30,26 @@ class NewsPostImporter extends BaseImporter
         }
 
         $save = static::getSaveData($entity);
-        $newPost = Post::create($save);
+        $newPost = AdvisoryCommittee::create($save);
+
+        // Save address custom field
+        $newPost->saveField('field_565868740dbc4', $entity->address);
+
         return $newPost;
     }
 
-    private static function getSaveData(NewsPostEntity $entity)
+    private static function getSaveData(AdvisoryCommitteeEntity $entity)
     {
         return [
             'post_title' => $entity->title,
-            'post_date' => $entity->date->format('Y-m-d H:i:s'),
-            'post_content' => $entity->content,
             'post_status' => 'publish',
-            'post_type' => Post::$postType,
+            'post_type' => AdvisoryCommittee::$postType,
             'post_author' => static::$authorId,
             'meta' => static::getReddotMeta($entity),
         ];
     }
 
-    private static function getReddotMeta(NewsPostEntity $entity)
+    private static function getReddotMeta(AdvisoryCommitteeEntity $entity)
     {
         return [
             'reddot_import' => 1,
