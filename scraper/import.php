@@ -42,7 +42,7 @@ FileSystemCache::$cacheDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'cache';
 
 // Configure importers
 BaseImporter::$authorId = 2;
-BaseImporter::$skipExisting = false;
+BaseImporter::$skipExisting = true;
 
 $resources = Spider::createCollectionFromUrl($_ENV['IMPORT_URL']);
 
