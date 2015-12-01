@@ -16,14 +16,9 @@
                 the_sub_field('heading');
                 break;
 
-              // Internal link
-              case 'internal':
-                // @TODO
-                break;
-
-              // External link
-              case 'external':
-                echo '<a href="' . esc_attr(get_sub_field('link_external')) . '">';
+              default:
+                $url = get_sub_field('link_' . $linkType);
+                echo '<a href="' . esc_attr($url) . '">';
                 the_sub_field('heading');
                 echo '</a>';
                 break;
@@ -38,17 +33,8 @@
             <div class="more">
               <?php
 
-              switch ($linkType) {
-                // Internal link
-                case 'internal':
-                  // @TODO
-                  break;
-
-                // External link
-                case 'external':
-                  echo '<a href="' . esc_attr(get_sub_field('link_external')) . '">Find out more &gt;</a>';
-                  break;
-              }
+              $url = get_sub_field('link_' . $linkType);
+              echo '<a href="' . esc_attr($url) . '">Find our more &gt;</a>';
 
               ?>
             </div>
