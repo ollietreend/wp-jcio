@@ -43,6 +43,7 @@ FileSystemCache::$cacheDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'cache';
 // Configure importers
 BaseImporter::$authorId = 2;
 BaseImporter::$skipExisting = true;
+BaseImporter::$baseFilePath = $_ENV['IMPORT_PATH'];
 
 $resources = Spider::createCollectionFromUrl($_ENV['IMPORT_URL']);
 
@@ -85,3 +86,62 @@ echo <<<EOF
 EOF;
 $statements = DisciplinaryStatementList::getList($resources);
 DisciplinaryStatementImporter::importMany($statements);
+
+echo <<<EOF
+
++------------------------------------------------------------------------+
+| REMAPPING INTERNAL LINKS                                               |
++------------------------------------------------------------------------+
+
+EOF;
+/**
+ * This stuff is a bit messy – but it's very specific and single-use due to the
+ * structure of the import content.
+ */
+$homepage = false;
+$rulesregulations = false;
+$reportspublications = false;
+foreach ($pages as $entity) {
+    $sniffer = $entity->resource->getPageSniffer();
+    if ($sniffer->isHomepage) {
+        $homepage = $entity;
+    }
+
+    if ($entity->title == 'Rules & regulations') {
+        $rulesregulations = $entity;
+    }
+
+    if ($entity->title == 'Reports & publications') {
+        $reportspublications = $entity;
+    }
+}
+
+if ($homepage) {
+    $post = \Scraper\WordPress\Post\Page::getByMeta([
+        'reddot_import' => true,
+        'reddot_url' => $homepage->resource->relativeUrl,
+    ]);
+
+    $rewriter = new \Scraper\Import\UrlRewriter\HomepageUrlRewriter($homepage, $post);
+    $rewriter->rewrite();
+}
+
+if ($rulesregulations) {
+    $post = \Scraper\WordPress\Post\Page::getByMeta([
+        'reddot_import' => true,
+        'reddot_url' => $rulesregulations->resource->relativeUrl,
+    ]);
+
+    $rewriter = new \Scraper\Import\UrlRewriter\RulesRegulationsUrlRewriter($rulesregulations, $post);
+    $rewriter->rewrite();
+}
+
+if ($reportspublications) {
+    $post = \Scraper\WordPress\Post\Page::getByMeta([
+        'reddot_import' => true,
+        'reddot_url' => $reportspublications->resource->relativeUrl,
+    ]);
+
+    $rewriter = new \Scraper\Import\UrlRewriter\ReportsPublicationsUrlRewriter($reportspublications, $post);
+    $rewriter->rewrite();
+}
