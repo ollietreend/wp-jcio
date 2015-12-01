@@ -4,7 +4,7 @@ namespace Scraper\Source\ContentEntity;
 
 use DateTime;
 
-class NewsPostEntity
+class NewsPostEntity extends BaseContentEntity
 {
     public function __construct($content)
     {

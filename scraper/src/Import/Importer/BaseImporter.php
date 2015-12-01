@@ -1,6 +1,6 @@
 <?php
 
-namespace Scraper\Import;
+namespace Scraper\Import\Importer;
 
 class BaseImporter {
     /**

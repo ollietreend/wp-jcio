@@ -1,6 +1,6 @@
 <?php
 
-namespace Scraper\Import;
+namespace Scraper\Import\Importer;
 
 use Scraper\Import\PageVariations\AdvisoryCommitteePageVariations;
 use Scraper\Import\PageVariations\BasePageVariations;

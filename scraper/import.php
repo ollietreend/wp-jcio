@@ -31,11 +31,11 @@ use Scraper\Source\ContentLister\PageList;
 use Scraper\Source\ContentLister\NewsPostList;
 use Scraper\Source\ContentLister\DisciplinaryStatementList;
 use Scraper\Source\ContentLister\AdvisoryCommitteeList;
-use Scraper\Import\BaseImporter;
-use Scraper\Import\NewsPostImporter;
-use Scraper\Import\PageImporter;
-use Scraper\Import\AdvisoryCommitteeImporter;
-use Scraper\Import\DisciplinaryStatementImporter;
+use Scraper\Import\Importer\BaseImporter;
+use Scraper\Import\Importer\NewsPostImporter;
+use Scraper\Import\Importer\PageImporter;
+use Scraper\Import\Importer\AdvisoryCommitteeImporter;
+use Scraper\Import\Importer\DisciplinaryStatementImporter;
 
 // Configure filesystem cache
 FileSystemCache::$cacheDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'cache';

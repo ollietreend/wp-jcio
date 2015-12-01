@@ -1,6 +1,6 @@
 <?php
 
-namespace Scraper\Import;
+namespace Scraper\Import\Importer;
 
 use Scraper\Source\ContentEntity\DisciplinaryStatementEntity;
 use Scraper\WordPress\Post\DisciplinaryStatement;

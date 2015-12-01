@@ -6,7 +6,7 @@ use Scraper\Source\Resource;
 use Scraper\Utility\LazyProperties;
 use Smalot\PdfParser\Parser;
 
-class DisciplinaryStatementEntity
+class DisciplinaryStatementEntity extends BaseContentEntity
 {
     use LazyProperties;
 

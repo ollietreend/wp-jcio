@@ -7,7 +7,7 @@ use Scraper\Utility\LazyProperties;
 use Scraper\Utility\TextHelper;
 use Symfony\Component\DomCrawler\Crawler;
 
-class AdvisoryCommitteeEntity
+class AdvisoryCommitteeEntity extends BaseContentEntity
 {
     use LazyProperties;
 
