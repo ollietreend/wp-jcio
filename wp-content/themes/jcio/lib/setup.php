@@ -34,7 +34,13 @@ function setup() {
   // Custom stylesheet for visual editor
   add_editor_style(Assets\asset_path('styles/editor-style.css'));
 }
-add_action('after_setup_theme', __NAMESPACE__ . '\\setup');
+add_action('after_setup_theme', __NAMESPACE__ . '\\setup', 5);
+
+function after_setup() {
+  // Include custom nav walker
+  require 'classes/main-menu-nav-walker.php';
+}
+add_action('after_setup_theme', __NAMESPACE__ . '\\after_setup', 50);
 
 /**
  * Determine which pages should NOT display the sidebar

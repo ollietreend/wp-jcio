@@ -7,6 +7,7 @@
       wp_nav_menu([
         'theme_location' => 'primary_navigation',
         'container' => false,
+        'walker' => new \Roots\Soil\Nav\MainMenuNavWalker()
       ]);
     }
 
