@@ -14,7 +14,7 @@ class AdvisoryCommittee {
    */
   public function __construct() {
     add_action('init', array($this, 'registerPostType'));
-    add_filter('pre_get_posts', array($this, 'adminOrderAlphabetically'));
+    add_filter('pre_get_posts', array($this, 'orderAlphabetically'));
     add_action('admin_init', array($this, 'adminRemoveDateFilter'));
     add_action('admin_head', array($this, 'adminHeadStyles'));
     add_filter(sprintf('manage_%s_posts_columns', $this->postType) , array($this, 'manageColumns'));
@@ -63,12 +63,15 @@ class AdvisoryCommittee {
   }
 
   /**
-   * Order posts alphabetically in the admin area.
+   * Order posts alphabetically.
    *
    * @param \WP_Query $wpquery
    */
-  public function adminOrderAlphabetically(\WP_Query $wpquery) {
-    if (is_admin() && $wpquery->query['post_type'] == $this->postType) {
+  public function orderAlphabetically(\WP_Query $wpquery) {
+    if (
+      $wpquery->query['post_type'] == $this->postType &&
+      !isset($wpquery->query['orderby'])
+    ) {
       $wpquery->set('orderby', 'title');
       $wpquery->set('order', 'ASC');
     }

@@ -24,19 +24,13 @@
         // JavaScript to be fired on all pages, after page specific JS is fired
       }
     },
-    // Home page
-    'home': {
+    // Page Template: Advisory Committee
+    'page_template_template_advisory_committee': {
       init: function() {
-        // JavaScript to be fired on the home page
-      },
-      finalize: function() {
-        // JavaScript to be fired on the home page, after the init JS
-      }
-    },
-    // About us page, note the change from about-us to about_us.
-    'about_us': {
-      init: function() {
-        // JavaScript to be fired on the about us page
+        $("#submit").hide();
+        $("#page-changer select").change(function() {
+          window.location = $("#page-changer select option:selected").val();
+        });
       }
     }
   };
