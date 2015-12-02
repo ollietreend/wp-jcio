@@ -31,3 +31,18 @@ function excerpt_more() {
   return ' &hellip; <a href="' . get_permalink() . '">' . __('Continued', 'sage') . '</a>';
 }
 add_filter('excerpt_more', __NAMESPACE__ . '\\excerpt_more');
+
+/**
+ * Default settings for Breadcumb NavXT plugin
+ *
+ * @param $settings
+ * @return mixed
+ */
+function bcn_settings_init($settings) {
+  $settings['Hhome_template'] = '<span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" title="Go to %title%." href="%link%" class="%type%">Home</a></span>';
+  $settings['Hhome_template_no_anchor'] = '<span typeof="v:Breadcrumb"><span property="v:title">Home</span></span>';
+  $settings['hseparator'] = ' › ';
+
+  return $settings;
+}
+add_filter('bcn_settings_init', __NAMESPACE__ . '\\bcn_settings_init');

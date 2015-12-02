@@ -8,5 +8,15 @@
 
 <!-- Breadcrumb -->
 <div id="breadcrumbwrapper">
-  <div id="breadcrumb"></div><!-- end breadcrumb -->
+  <div id="breadcrumb">
+    <div class="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
+      <?php
+      if (function_exists('bcn_display') && !is_front_page())
+      {
+        bcn_display();
+      }
+      ?>
+    </div>
+  </div><!-- end breadcrumb -->
+
 </div><!-- end breadcrumbwrapper -->

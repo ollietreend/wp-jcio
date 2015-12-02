@@ -28,6 +28,12 @@ function tgmpa_register() {
     ),
 
     array(
+      'name'        => 'Breadcrumb NavXT',
+      'slug'        => 'breadcrumb-navxt',
+      'required'    => true,
+    ),
+
+    array(
       'name'        => 'WordPress SEO by Yoast',
       'slug'        => 'wordpress-seo',
       'is_callable' => 'wpseo_init',
