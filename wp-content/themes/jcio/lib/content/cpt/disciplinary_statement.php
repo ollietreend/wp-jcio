@@ -14,6 +14,7 @@ class DisciplinaryStatement {
    */
   public function __construct() {
     add_action('init', array($this, 'registerPostType'));
+    add_action('init', array($this, 'addRewriteRules'));
   }
 
   /**
@@ -55,6 +56,10 @@ class DisciplinaryStatement {
     );
 
     register_post_type($this->postType, $args);
+  }
+
+  public function addRewriteRules() {
+    add_rewrite_rule('^disciplinary-statements/([0-9]{4})/?', 'index.php?pagename=disciplinary-statements&ds_year=$matches[1]', 'top');
   }
 }
 

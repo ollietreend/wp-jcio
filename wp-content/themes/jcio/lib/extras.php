@@ -46,3 +46,4 @@ function bcn_settings_init($settings) {
   return $settings;
 }
 add_filter('bcn_settings_init', __NAMESPACE__ . '\\bcn_settings_init');
+
