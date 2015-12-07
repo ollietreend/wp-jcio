@@ -32,7 +32,7 @@ $statements = new WP_Query(array(
           <a href="<?php echo esc_url($document['url']); ?>" target="_blank" onclick="pageTracker._trackPageview('<?php echo esc_url($document['url']); ?>');">
             <?php the_title(); ?>
           </a>
-          [<?php echo strtoupper($extension); ?>, <?php echo size_format($size); ?>]
+          [<?php echo strtoupper($extension) . ' ' . size_format($size); ?>]
         </li>
       <?php endwhile; ?>
     </ul>
