@@ -62,3 +62,35 @@ function assets() {
   wp_enqueue_script('sage/js', Assets\asset_path('scripts/main.js'), ['jquery'], null, true);
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\assets', 100);
+
+/**
+ * Unregister category and tag taxonomies.
+ */
+function unregister_categories_and_tags() {
+  register_taxonomy('category', array());
+  register_taxonomy('post_tag', array());
+}
+add_action('init', __NAMESPACE__ . '\\unregister_categories_and_tags');
+
+/**
+ * Remove Comments functionality
+ */
+// Removes from admin menu
+function admin_menu_remove_comments() {
+  remove_menu_page( 'edit-comments.php' );
+}
+add_action('admin_menu', __NAMESPACE__ . '\\admin_menu_remove_comments');
+
+// Removes from post and pages
+function init_remove_comments() {
+  remove_post_type_support( 'post', 'comments' );
+  remove_post_type_support( 'page', 'comments' );
+}
+add_action('init', __NAMESPACE__ . '\\init_remove_comments', 100);
+
+// Removes from admin bar
+function admin_bar_remove_comments() {
+  global $wp_admin_bar;
+  $wp_admin_bar->remove_menu('comments');
+}
+add_action('wp_before_admin_bar_render', __NAMESPACE__ . '\\admin_bar_remove_comments');

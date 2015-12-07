@@ -52,6 +52,38 @@ p {line-height:1.5em;}
 #content ul#navBoxes li {font-size:0.9em; background:none!important; width:200px; height:245px; float:left; border: 1px dotted #4b1b68; margin-right: 10px; padding:8px;}
 #content ul#navBoxes li h2 {color:#4b1b68; border-bottom:1px dotted #4b1b68; padding:3px; font-size:1.1em;}
 
+/* News posts */
+.post {
+  margin-bottom: 3em;
+}
+.post-heading {
+  font-size: 1em;
+  font-weight: bold;
+  color: #000;
+}
+.screen-reader-text {
+  display: none;
+}
+.nav-links {
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+.nav-previous {
+  float: left;
+  a:before {
+    content: '\00AB';
+    padding-right: 0.3em;
+    display: inline-block;
+  }
+}
+.nav-next {
+  float: right;
+  a:after {
+    content: '\00BB';
+    padding-left: 0.3em;
+    display: inline-block;
+  }
+}
 
 /* footer */
 #footerwrapper {width: 100%;float: left; background-color: #fff;}

@@ -42,6 +42,7 @@ function bcn_settings_init($settings) {
   $settings['Hhome_template'] = '<span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" title="Go to %title%." href="%link%" class="%type%">Home</a></span>';
   $settings['Hhome_template_no_anchor'] = '<span typeof="v:Breadcrumb"><span property="v:title">Home</span></span>';
   $settings['hseparator'] = ' › ';
+  $settings['Spost_post_taxonomy_type'] = false;
 
   return $settings;
 }
