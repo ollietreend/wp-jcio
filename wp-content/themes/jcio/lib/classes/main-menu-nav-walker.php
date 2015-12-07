@@ -98,10 +98,6 @@ class MainMenuNavWalker extends NavWalker
 
     $link_before = $args->link_before;
     $link_after = $args->link_after;
-    if ($depth === 1) {
-      $link_before .= '<span class="leftnavArrow">';
-      $link_after .= '</span>';
-    }
 
     /** This filter is documented in wp-includes/post-template.php */
     $item_output .= $link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $link_after;
@@ -132,6 +128,12 @@ class MainMenuNavWalker extends NavWalker
   }
 
   public function checkCurrent($classes) {
-    return preg_match('/(current[-_])|(?<!has-)active/', $classes);
+    if (stripos($classes, 'menu-disciplinary-statements') !== 0) {
+      // We need a slightly different rule for the disciplinary statements menu item,
+      // since we want it to show as active even when a sub-child page is active.
+      return preg_match('/(current[-_])|active/', $classes);
+    } else {
+      return preg_match('/(current[-_])|(?<!has-)active/', $classes);
+    }
   }
 }
