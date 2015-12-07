@@ -19,7 +19,7 @@ function title() {
   } elseif (is_search()) {
     return sprintf(__('Search Results for %s', 'sage'), get_search_query());
   } elseif (is_404()) {
-    return __('Not Found', 'sage');
+    return __('Sorry, page not found', 'sage');
   } elseif (is_page_template('template-disciplinary-statements-child-page.php')) {
     return get_the_title($post->post_parent);
   } else {

@@ -94,3 +94,5 @@ function admin_bar_remove_comments() {
   $wp_admin_bar->remove_menu('comments');
 }
 add_action('wp_before_admin_bar_render', __NAMESPACE__ . '\\admin_bar_remove_comments');
+
+add_action('comments_open', '__return_false');

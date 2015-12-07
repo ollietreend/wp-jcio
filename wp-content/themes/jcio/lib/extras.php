@@ -48,3 +48,23 @@ function bcn_settings_init($settings) {
 }
 add_filter('bcn_settings_init', __NAMESPACE__ . '\\bcn_settings_init');
 
+/**
+ * Disable search pages.
+ *
+ * @param $query
+ * @param bool|true $error
+ */
+function disable_search($query, $error = true) {
+  if (is_search()) {
+    // Change search query
+    $query->is_search = false;
+    $query->query_vars[s] = false;
+    $query->query[s] = false;
+
+    if ($error == true) {
+      $query->is_404 = true;
+    }
+  }
+}
+add_action('parse_query', __NAMESPACE__ . '\\disable_search');
+add_filter('get_search_form', function() { return ''; });

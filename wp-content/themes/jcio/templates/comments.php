@@ -2,6 +2,11 @@
 if (post_password_required()) {
   return;
 }
+
+if (!comments_open() && get_comments_number() == '0' && !post_type_supports(get_post_type(), 'comments')) {
+  return;
+}
+
 ?>
 
 <section id="comments" class="comments">
