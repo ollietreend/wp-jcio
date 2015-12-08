@@ -24,15 +24,12 @@ $statements = new WP_Query(array(
           <?php
 
           $document = get_field('document');
-          $path = get_attached_file($document['ID']);
-          $extension = pathinfo($path, PATHINFO_EXTENSION);
-          $size = filesize($path);
 
           ?>
           <a href="<?php echo esc_url($document['url']); ?>" target="_blank" onclick="pageTracker._trackPageview('<?php echo esc_url($document['url']); ?>');">
             <?php the_title(); ?>
           </a>
-          [<?php echo strtoupper($extension) . ' ' . size_format($size); ?>]
+          <?php echo \Roots\Sage\Extras\attachment_meta_info($document['ID']); ?>
         </li>
       <?php endwhile; ?>
     </ul>

@@ -68,3 +68,29 @@ function disable_search($query, $error = true) {
 }
 add_action('parse_query', __NAMESPACE__ . '\\disable_search');
 add_filter('get_search_form', function() { return ''; });
+
+/**
+ * Get attachment ID given its URL
+ *
+ * @param $url
+ * @return mixed
+ */
+function get_attachment_id_from_url($url) {
+  global $wpdb;
+  $attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ));
+  return $attachment[0];
+}
+
+/**
+ * Return a string of meta info for the specified attachment.
+ * Example: "[PDF, 1 MB]"
+ *
+ * @param int $attachmentID
+ * @return string
+ */
+function attachment_meta_info($attachmentID) {
+  $path = get_attached_file($attachmentID);
+  $extension = pathinfo($path, PATHINFO_EXTENSION);
+  $size = filesize($path);
+  return sprintf('[%s, %s]', strtoupper($extension), size_format($size));
+}
