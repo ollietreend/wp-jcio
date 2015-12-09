@@ -77,6 +77,11 @@ add_filter('get_search_form', function() { return ''; });
  */
 function get_attachment_id_from_url($url) {
   global $wpdb;
+  $base = home_url();
+  if (substr($url, 0, strlen($base)) !== $base) {
+    // Make relative URL absolute
+    $url = $base . $url;
+  }
   $attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ));
   return $attachment[0];
 }
