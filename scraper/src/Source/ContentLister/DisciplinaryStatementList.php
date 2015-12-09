@@ -66,7 +66,11 @@ class DisciplinaryStatementList
             $resource = $resources->findByRelativeUrl($href);
         }
 
-        if ($resource->getMimeType() == 'application/pdf') {
+        $allowedMimeTypes = [
+            'application/pdf',
+            'application/msword',
+        ];
+        if (in_array($resource->getMimeType(), $allowedMimeTypes)) {
             return $resource;
         } else {
             return false;

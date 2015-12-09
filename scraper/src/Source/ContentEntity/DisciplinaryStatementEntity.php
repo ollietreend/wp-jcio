@@ -4,6 +4,7 @@ namespace Scraper\Source\ContentEntity;
 
 use Scraper\Source\Resource;
 use Scraper\Utility\LazyProperties;
+use Scraper\Utility\OfficeFileReader;
 use Smalot\PdfParser\Parser;
 
 class DisciplinaryStatementEntity extends BaseContentEntity
@@ -61,9 +62,22 @@ class DisciplinaryStatementEntity extends BaseContentEntity
 
     public function getDate()
     {
-        $parser = new Parser();
-        $pdf = $parser->parseFile($this->filePath);
-        $text = $pdf->getText();
+        switch ($this->resource->getMimeType()) {
+            case 'application/pdf':
+                $parser = new Parser();
+                $pdf = $parser->parseFile($this->filePath);
+                $text = $pdf->getText();
+                break;
+
+            case 'application/msword':
+                $file = new OfficeFileReader($this->filePath);
+                $text = $file->convertToText();
+                break;
+
+            default:
+                $text = '';
+                break;
+        }
 
         // Try and find a date in the PDF text
         $found = preg_match('/(\d+)([a-z]{2})?\s(January|February|March|April|May|June|July|August|September|October|November|December)\s(\d{4})/i', $text, $matches);
@@ -73,20 +87,22 @@ class DisciplinaryStatementEntity extends BaseContentEntity
 
         if (preg_match($regexFullDate, $text, $matches)) {
             // We found the full date (DMY) in the statement text
-
             $date = join(' ', [$matches[1], $matches[3], $matches[4]]);
             $date = new \DateTime($date);
             return $date;
         } else if (preg_match($regexMonthYear, $text, $matches)) {
             // We only found the month & year (MY) in the statement text
-
             $date = join(' ', [$matches[1], $matches[2]]);
 
-            // Take the day from the PDF meta data, and month/year from the statement text
-            $details = $pdf->getDetails();
-            $pdfDate = new \DateTime($details['CreationDate']);
+            if (isset($pdf)) {
+                // Take the day from the PDF meta data, and month/year from the statement text
+                $details = $pdf->getDetails();
+                $guessDate = new \DateTime($details['CreationDate']);
+            } else {
+                $guessDate = new \DateTime();
+            }
 
-            $date = $pdfDate->format('d ') . $date;
+            $date = $guessDate->format('d ') . $date;
             $date = new \DateTime($date);
             return $date;
         } else {
