@@ -2,7 +2,7 @@
 
 namespace Scraper\Source;
 
-use Arachnid\Crawler;
+use Scraper\Utility\Crawler;
 use FileSystemCache;
 use FileSystemCacheKey;
 
