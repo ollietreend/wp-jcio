@@ -7,6 +7,7 @@ use Scraper\Import\PageVariations\BasePageVariations;
 use Scraper\Import\PageVariations\ChecklistPageVariations;
 use Scraper\Import\PageVariations\HomePageVariations;
 use Scraper\Import\PageVariations\NewsPageVariations;
+use Scraper\Import\PageVariations\LinkListPageVariations;
 use Scraper\Source\ContentEntity\PageEntity;
 use Scraper\WordPress\Post\Page;
 
@@ -94,6 +95,8 @@ class PageImporter extends BaseImporter
             return new AdvisoryCommitteePageVariations($entity);
         } else if ($thePage->hasAChecklist) {
             return new ChecklistPageVariations($entity);
+        } else if ($thePage->hasALinkList) {
+            return new LinkListPageVariations($entity);
         } else {
             return new BasePageVariations($entity);
         }

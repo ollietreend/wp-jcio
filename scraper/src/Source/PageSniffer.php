@@ -25,6 +25,7 @@ class PageSniffer
         'isDisciplinaryStatementsPage',
         'isAdvisoryCommitteePage',
         'hasAChecklist',
+        'hasALinkList',
     ];
 
     /**
@@ -87,5 +88,12 @@ class PageSniffer
         $crawler = $this->resource->getCrawler();
         $tickCross = $crawler->filter('.left-column .column-head-tick, .right-column .column-head-cross');
         return (count($tickCross) == 2);
+    }
+
+    public function getHasALinkList()
+    {
+        $crawler = $this->resource->getCrawler();
+        $list = $crawler->filter('ul.link-list');
+        return (count($list) > 0);
     }
 }
