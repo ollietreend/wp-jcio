@@ -8,6 +8,7 @@ use Scraper\Import\PageVariations\ChecklistPageVariations;
 use Scraper\Import\PageVariations\HomePageVariations;
 use Scraper\Import\PageVariations\NewsPageVariations;
 use Scraper\Import\PageVariations\LinkListPageVariations;
+use Scraper\Import\PageVariations\DisciplinaryStatementsChildPageVariations;
 use Scraper\Source\ContentEntity\PageEntity;
 use Scraper\WordPress\Post\Page;
 
@@ -97,6 +98,8 @@ class PageImporter extends BaseImporter
             return new ChecklistPageVariations($entity);
         } else if ($thePage->hasALinkList) {
             return new LinkListPageVariations($entity);
+        } else if ($thePage->isDisciplinaryStatementsChildPage) {
+            return new DisciplinaryStatementsChildPageVariations($entity);
         } else {
             return new BasePageVariations($entity);
         }

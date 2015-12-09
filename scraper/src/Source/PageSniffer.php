@@ -23,6 +23,7 @@ class PageSniffer
         'isNewsPage',
         'isUnwantedPage',
         'isDisciplinaryStatementsPage',
+        'isDisciplinaryStatementsChildPage',
         'isAdvisoryCommitteePage',
         'hasAChecklist',
         'hasALinkList',
@@ -75,6 +76,14 @@ class PageSniffer
         return (
             stripos($this->resource->meta['title'], 'Disciplinary statements') !== false &&
             stripos($this->resource->meta['title'], 'Publication Policy') === false
+        );
+    }
+
+    public function getIsDisciplinaryStatementsChildPage()
+    {
+        return (
+            stripos($this->resource->meta['title'], 'Disciplinary statements') !== false &&
+            stripos($this->resource->meta['title'], 'Publication Policy') !== false
         );
     }
 
