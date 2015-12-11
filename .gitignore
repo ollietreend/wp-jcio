@@ -45,6 +45,7 @@ Thumbs.db
 /wp-content/cache/
 /wp-content/wp-cache-config.php
 /wp-content/upgrade/
+/wp-content/languages/
 /wp-content/uploads/
 /wp-content/themes/*
 /wp-content/plugins/*

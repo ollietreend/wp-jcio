@@ -1,7 +1,15 @@
 <?php get_template_part('templates/page', 'header'); ?>
 
-<div class="alert alert-warning">
-  <?php _e('Sorry, but the page you were trying to view does not exist.', 'sage'); ?>
-</div>
+<p>You may have followed a broken link from another site or found an error somewhere on our site.</p>
+<p>Try one of the links below to find the content you're looking for.</p>
 
-<?php get_search_form(); ?>
+<?php
+
+if (has_nav_menu('primary_navigation')) {
+  wp_nav_menu([
+    'theme_location' => 'primary_navigation',
+    'container' => false,
+  ]);
+}
+
+?>

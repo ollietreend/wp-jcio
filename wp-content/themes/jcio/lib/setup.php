@@ -16,10 +16,6 @@ function setup() {
   add_theme_support('soil-jquery-cdn');
   add_theme_support('soil-relative-urls');
 
-  // Make theme available for translation
-  // Community translations can be found at https://github.com/roots/sage-translations
-  load_theme_textdomain('sage', get_template_directory() . '/lang');
-
   // Enable plugins to manage the document title
   // http://codex.wordpress.org/Function_Reference/add_theme_support#Title_Tag
   add_theme_support('title-tag');
@@ -27,18 +23,9 @@ function setup() {
   // Register wp_nav_menu() menus
   // http://codex.wordpress.org/Function_Reference/register_nav_menus
   register_nav_menus([
-    'primary_navigation' => __('Primary Navigation', 'sage')
+    'primary_navigation' => 'Primary Navigation',
+    'footer_navigation' => 'Footer Navigation',
   ]);
-
-  // Enable post thumbnails
-  // http://codex.wordpress.org/Post_Thumbnails
-  // http://codex.wordpress.org/Function_Reference/set_post_thumbnail_size
-  // http://codex.wordpress.org/Function_Reference/add_image_size
-  add_theme_support('post-thumbnails');
-
-  // Enable post formats
-  // http://codex.wordpress.org/Post_Formats
-  add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
 
   // Enable HTML5 markup support
   // http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5
@@ -47,47 +34,19 @@ function setup() {
   // Custom stylesheet for visual editor
   add_editor_style(Assets\asset_path('styles/editor-style.css'));
 }
-add_action('after_setup_theme', __NAMESPACE__ . '\\setup');
+add_action('after_setup_theme', __NAMESPACE__ . '\\setup', 5);
 
-/**
- * Register sidebars
- */
-function widgets_init() {
-  register_sidebar([
-    'name'          => __('Primary', 'sage'),
-    'id'            => 'sidebar-primary',
-    'before_widget' => '<section class="widget %1$s %2$s">',
-    'after_widget'  => '</section>',
-    'before_title'  => '<h3>',
-    'after_title'   => '</h3>'
-  ]);
-
-  register_sidebar([
-    'name'          => __('Footer', 'sage'),
-    'id'            => 'sidebar-footer',
-    'before_widget' => '<section class="widget %1$s %2$s">',
-    'after_widget'  => '</section>',
-    'before_title'  => '<h3>',
-    'after_title'   => '</h3>'
-  ]);
+function after_setup() {
+  // Include custom nav walker
+  require 'classes/main-menu-nav-walker.php';
 }
-add_action('widgets_init', __NAMESPACE__ . '\\widgets_init');
+add_action('after_setup_theme', __NAMESPACE__ . '\\after_setup', 50);
 
 /**
  * Determine which pages should NOT display the sidebar
  */
 function display_sidebar() {
-  static $display;
-
-  isset($display) || $display = !in_array(true, [
-    // The sidebar will NOT be displayed if ANY of the following return true.
-    // @link https://codex.wordpress.org/Conditional_Tags
-    is_404(),
-    is_front_page(),
-    is_page_template('template-custom.php'),
-  ]);
-
-  return apply_filters('sage/display_sidebar', $display);
+  return false;
 }
 
 /**
@@ -103,3 +62,37 @@ function assets() {
   wp_enqueue_script('sage/js', Assets\asset_path('scripts/main.js'), ['jquery'], null, true);
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\assets', 100);
+
+/**
+ * Unregister category and tag taxonomies.
+ */
+function unregister_categories_and_tags() {
+  register_taxonomy('category', array());
+  register_taxonomy('post_tag', array());
+}
+add_action('init', __NAMESPACE__ . '\\unregister_categories_and_tags');
+
+/**
+ * Remove Comments functionality
+ */
+// Removes from admin menu
+function admin_menu_remove_comments() {
+  remove_menu_page( 'edit-comments.php' );
+}
+add_action('admin_menu', __NAMESPACE__ . '\\admin_menu_remove_comments');
+
+// Removes from post and pages
+function init_remove_comments() {
+  remove_post_type_support( 'post', 'comments' );
+  remove_post_type_support( 'page', 'comments' );
+}
+add_action('init', __NAMESPACE__ . '\\init_remove_comments', 100);
+
+// Removes from admin bar
+function admin_bar_remove_comments() {
+  global $wp_admin_bar;
+  $wp_admin_bar->remove_menu('comments');
+}
+add_action('wp_before_admin_bar_render', __NAMESPACE__ . '\\admin_bar_remove_comments');
+
+add_action('comments_open', '__return_false');
