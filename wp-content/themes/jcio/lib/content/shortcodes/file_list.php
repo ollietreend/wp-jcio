@@ -10,8 +10,6 @@ use DOMDocument;
 use DOMElement;
 
 class FileList {
-  public $uses = 0;
-
   public function __construct() {
     add_shortcode('file_list', array($this, 'shortcode'));
   }
