@@ -9,6 +9,8 @@ $statements = new WP_Query(array(
   'post_type' => 'disciplinary_stmnt',
   'year' => $year,
   'posts_per_page' => -1,
+  'orderby' => 'post_date',
+  'order' => 'DESC',
 ));
 
 ?>
@@ -26,9 +28,7 @@ $statements = new WP_Query(array(
           $document = get_field('document');
 
           ?>
-          <a href="<?php echo esc_url($document['url']); ?>" target="_blank" onclick="pageTracker._trackPageview('<?php echo esc_url($document['url']); ?>');">
-            <?php the_title(); ?>
-          </a>
+          <a href="<?php echo esc_url($document['url']); ?>" target="_blank" onclick="pageTracker._trackPageview('<?php echo esc_url($document['url']); ?>');"><?php the_title(); ?></a>
           <?php echo \Roots\Sage\Extras\attachment_meta_info($document['ID']); ?>
         </li>
       <?php endwhile; ?>

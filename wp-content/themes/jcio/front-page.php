@@ -41,6 +41,7 @@
           <?php endif; ?>
         </li>
       <?php endwhile; ?>
+      <?php wp_reset_postdata(); ?>
     </ul>
   <?php endif; ?>
 
