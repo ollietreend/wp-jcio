@@ -17,7 +17,7 @@ class DisciplinaryStatement {
   public function __construct() {
     add_action('init', array($this, 'registerPostType'));
     add_action('init', array($this, 'addRewriteRules'));
-    add_action('template_redirect', array($this, 'redirectToCurrentYear'));
+    add_action('template_redirect', array($this, 'redirectToLatestYear'));
     add_action('bcn_after_fill', array($this, 'addYearBreadcrumbs'));
   }
 
@@ -76,11 +76,11 @@ class DisciplinaryStatement {
    * Redirect to the most recent / current year if the Disciplinary Statements
    * page is loaded without a year specified in the URL parameters.
    */
-  public function redirectToCurrentYear() {
+  public function redirectToLatestYear() {
     $year = get_query_var('disciplinary_stmnt_year');
     if (is_page_template('template-disciplinary-statements.php') && empty($year)) {
-      $years = self::getArchiveYears();
-      $url = self::getYearPageUrl($years[0]);
+      $year = self::getLatestYear();
+      $url = self::getYearPageUrl($year);
       wp_redirect($url);
       exit;
     }
@@ -125,6 +125,11 @@ class DisciplinaryStatement {
     }, $years);
 
     return $years;
+  }
+
+  public static function getLatestYear() {
+    $allYears = self::getArchiveYears();
+    return array_shift($allYears);
   }
 
   public static function getYearPageUrl($year) {
