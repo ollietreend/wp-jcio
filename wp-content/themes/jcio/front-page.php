@@ -34,13 +34,14 @@
               <?php
 
               $url = get_sub_field('link_' . $linkType);
-              echo '<a href="' . esc_attr($url) . '">Find our more &gt;</a>';
+              echo '<a href="' . esc_attr($url) . '">Find out more &gt;</a>';
 
               ?>
             </div>
           <?php endif; ?>
         </li>
       <?php endwhile; ?>
+      <?php wp_reset_postdata(); ?>
     </ul>
   <?php endif; ?>
 

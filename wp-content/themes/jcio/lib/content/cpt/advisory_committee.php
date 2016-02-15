@@ -69,6 +69,7 @@ class AdvisoryCommittee {
    */
   public function orderAlphabetically(\WP_Query $wpquery) {
     if (
+      isset($wpquery->query['post_type']) &&
       $wpquery->query['post_type'] == $this->postType &&
       !isset($wpquery->query['orderby'])
     ) {

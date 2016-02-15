@@ -99,3 +99,39 @@ function attachment_meta_info($attachmentID) {
   $size = filesize($path);
   return sprintf('[%s, %s]', strtoupper($extension), size_format($size));
 }
+/**
+ * Truncates text starting from the end.
+ *
+ * Cuts a string to the length of $length and replaces the first characters
+ * with the ellipsis if the text is longer than length.
+ *
+ * ### Options:
+ *
+ * - `ellipsis` Will be used as Beginning and prepended to the trimmed string
+ * - `exact` If false, $text will not be cut mid-word
+ *
+ * @param string $text String to truncate.
+ * @param int $length Length of returned string, including ellipsis.
+ * @param array $options An array of options.
+ * @return string Trimmed string.
+ */
+function trimToLength($text, $length = 100, array $options = [])
+{
+  $default = [
+    'ellipsis' => '…',
+    'exact' => true,
+  ];
+  $options += $default;
+
+  if (mb_strlen($text) <= $length) {
+    return $text;
+  }
+
+  $truncate = mb_substr($text, 0, $length - mb_strlen($options['ellipsis']));
+  if (!$options['exact']) {
+    $spacepos = mb_strrpos($truncate, ' ');
+    $truncate = $spacepos === false ? '' : trim(mb_substr($truncate, 0, $spacepos));
+  }
+
+  return $truncate . $options['ellipsis'];
+}

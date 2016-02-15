@@ -49,8 +49,8 @@ p {line-height:1.5em;}
 #content ul.link-list li.ext {background: url(../images/ext.gif) no-repeat 0 5px; padding-left: 25px; margin-bottom: 15px;}
 #content #alert {border:1px dotted #CC0000; background:#FFC; padding:0 6px; color:#333; font-size:0.8em;}
 #content ul#navBoxes {margin:10px 0 0 -11px; padding:0; list-style:none;}
-#content ul#navBoxes li {font-size:0.9em; background:none!important; width:200px; height:245px; float:left; border: 1px dotted #4b1b68; margin-right: 10px; padding:8px;}
-#content ul#navBoxes li h2 {color:#4b1b68; border-bottom:1px dotted #4b1b68; padding:3px; font-size:1.1em;}
+#content ul#navBoxes > li {font-size:0.9em; background:none!important; width:200px; height:245px; float:left; border: 1px dotted #4b1b68; margin-right: 10px; padding:8px;}
+#content ul#navBoxes > li h2 {color:#4b1b68; border-bottom:1px dotted #4b1b68; padding:3px; font-size:1.1em;}
 
 /* News posts */
 .post {

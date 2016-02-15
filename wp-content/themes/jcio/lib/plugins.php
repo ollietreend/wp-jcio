@@ -39,6 +39,13 @@ function tgmpa_register() {
       'is_callable' => 'wpseo_init',
       'required'    => false,
     ),
+
+    // Useful for editing "Contact a Tribunal President" page
+    array(
+      'name'        => 'MCE Table Buttons',
+      'slug'        => 'mce-table-buttons',
+      'required'    => false,
+    ),
   );
 
   /**
