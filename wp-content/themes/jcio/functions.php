@@ -16,7 +16,8 @@ $sage_includes = [
   'lib/titles.php',  // Page titles
   'lib/plugins.php', // Required plugins
   'lib/content.php', // Theme content setup
-  'lib/wrapper.php'  // Theme wrapper class
+  'lib/wrapper.php',  // Theme wrapper class
+  'lib/redirect-reddot-urls.php'  // Redirect old RedDot URLs
 ];
 
 foreach ($sage_includes as $file) {
