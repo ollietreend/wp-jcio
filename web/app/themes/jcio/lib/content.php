@@ -6,7 +6,7 @@ namespace Roots\Sage\Content;
  * Hide ACF from the admin menu.
  */
 function should_acf_show_admin() {
-  return !acf_pro_is_license_active() || ( defined('WP_ENV') && WP_ENV == 'development' );
+  return ( defined('WP_ENV') && WP_ENV == 'development' );
 }
 add_filter('acf/settings/show_admin', __NAMESPACE__ . '\\should_acf_show_admin');
 
