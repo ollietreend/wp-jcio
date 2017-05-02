@@ -14,7 +14,6 @@ $sage_includes = [
   'lib/extras.php',  // Custom functions
   'lib/setup.php',   // Theme setup
   'lib/titles.php',  // Page titles
-  'lib/plugins.php', // Required plugins
   'lib/content.php', // Theme content setup
   'lib/wrapper.php',  // Theme wrapper class
   'lib/redirect-reddot-urls.php'  // Redirect old RedDot URLs
