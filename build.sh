@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ###
 # Build Script
@@ -7,7 +8,10 @@
 ##
 
 # Clean up the working directory (useful when building from local dev files)
-git clean -xdf
+if [ -d ".git" ]
+then
+	git clean -xdf
+fi
 
 # Add composer auth file
 if [ ! -z $COMPOSER_USER ] && [ ! -z $COMPOSER_PASS ]
