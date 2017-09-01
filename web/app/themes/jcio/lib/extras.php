@@ -70,20 +70,33 @@ add_action('parse_query', __NAMESPACE__ . '\\disable_search');
 add_filter('get_search_form', function() { return ''; });
 
 /**
- * Get attachment ID given its URL
+ * Get attachment ID from its URL
  *
- * @param $url
- * @return mixed
+ * @param string $url
+ * @return bool|int The Attachment ID or FALSE if not found
  */
 function get_attachment_id_from_url($url) {
-  global $wpdb;
-  $base = home_url();
-  if (substr($url, 0, strlen($base)) !== $base) {
-    // Make relative URL absolute
-    $url = $base . $url;
-  }
-  $attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ));
-  return $attachment[0];
+	global $wpdb;
+
+	// First: try to find an exact match for the attachment GUID
+	$query = $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s LIMIT 1", $url);
+	$id = $wpdb->get_var($query);
+	if (!is_null($id)) {
+		return (int) $id;
+	}
+
+	// Fallback: try and do a fuzzier (but slower) LIKE match
+	// Drop everything before /uploads/ in the image src so we can match against different hostnames
+	$url_part = substr($url, strpos($url, '/uploads/'));
+	$like = '%' . $wpdb->esc_like($url_part);
+	$query = $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid LIKE %s LIMIT 1", $like);
+	$id = $wpdb->get_var($query);
+	if (!is_null($id)) {
+		return (int) $id;
+	}
+
+	// Else: attachment not found, return false
+	return false;
 }
 
 /**
