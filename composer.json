@@ -54,7 +54,8 @@
     "roots/soil": "3.5.0",
     "wpackagist-plugin/wordpress-seo": "*",
     "ministryofjustice/wp-rewrite-media-to-s3": "^0.1.0",
-    "wpackagist-plugin/google-analytics-dashboard-for-wp": "*"
+    "wpackagist-plugin/google-analytics-dashboard-for-wp": "*",
+    "wpackagist-plugin/classic-editor": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
