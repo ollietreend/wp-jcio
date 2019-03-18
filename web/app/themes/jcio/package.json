@@ -33,12 +33,12 @@
     "node-sass": "^4.11.0",
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.17.2",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "fsevents": "^1.2.7"
   },
   "dependencies": {
     "ajv": "^6.10.0",
     "braces": "^2.3.2",
-    "fsevents": "^1.2.7",
     "imagemin": "^6.1.0",
     "vue-template-compiler": "^2.6.9"
   }
