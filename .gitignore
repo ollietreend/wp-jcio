@@ -7,6 +7,9 @@ web/app/languages
 web/app/uploads/*
 !web/app/uploads/.gitkeep
 
+*.sql
+*.idea
+
 # WordPress
 web/wp
 web/.htaccess
