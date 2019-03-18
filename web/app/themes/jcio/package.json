@@ -17,29 +17,33 @@
       "url": "http://opensource.org/licenses/MIT"
     }
   ],
+  "dependencies": {
+    "ajv": "^6.10.0",
+    "cross-env": "^5.2.0",
+    "debounce": "^1.2.0",
+    "details-element-polyfill": "^2.0.1",
+    "imagemin": "^6.1.0",
+    "jquery": "^3.3.1",
+    "marked": "^0.3.19",
+    "npm": "^6.4.1",
+    "scrollpoints": "^0.4.0",
+    "url-search-params-polyfill": "^4.0.0",
+    "vue-template-compiler": "^2.5.16"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "browser-sync-webpack-plugin": "^2.0.1",
+    "laravel-mix": "^4.0.14",
+    "node-sass": "^4.11.0",
+    "resolve-url-loader": "^2.3.1",
+    "sass": "^1.17.2",
+    "sass-loader": "^7.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "hot": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "production": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
-  },
-  "devDependencies": {
-    "acorn": "^6.1.1",
-    "browser-sync": "^2.3.2",
-    "browser-sync-webpack-plugin": "^2.2.2",
-    "cross-env": "^5.2.0",
-    "laravel-mix": "^4.0.14",
-    "node-sass": "^4.11.0",
-    "resolve-url-loader": "^2.3.1",
-    "sass": "^1.17.2",
-    "sass-loader": "^7.1.0",
-    "fsevents": "^1.2.7"
-  },
-  "dependencies": {
-    "ajv": "^6.10.0",
-    "braces": "^2.3.2",
-    "imagemin": "^6.1.0",
-    "vue-template-compiler": "^2.6.9"
   }
 }
