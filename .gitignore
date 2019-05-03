@@ -9,6 +9,8 @@ web/app/uploads/*
 
 *.sql
 *.idea
+.DS_*
+._DS_*
 
 # WordPress
 web/wp
