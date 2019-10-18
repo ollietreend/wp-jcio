@@ -55,7 +55,9 @@
     "wpackagist-plugin/wordpress-seo": "*",
     "ministryofjustice/wp-rewrite-media-to-s3": "^0.1.0",
     "wpackagist-plugin/google-analytics-dashboard-for-wp": "*",
-    "wpackagist-plugin/classic-editor": "*"
+    "wpackagist-plugin/classic-editor": "*",
+    "ministryofjustice/cookie-compliance-for-wordpress": "*",
+    "ministryofjustice/wp-moj-components": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"

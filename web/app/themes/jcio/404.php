@@ -1,4 +1,4 @@
-<?php get_template_part('templates/page', 'header'); ?>
+<?php get_header(); ?>
 
 <p>You may have followed a broken link from another site or found an error somewhere on our site.</p>
 <p>Try one of the links below to find the content you're looking for.</p>

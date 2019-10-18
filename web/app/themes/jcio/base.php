@@ -6,11 +6,10 @@ use Roots\Sage\Wrapper;
 ?>
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?>>
-  <?php get_template_part('templates/head'); ?>
   <body <?php body_class(); ?>>
     <?php
       do_action('get_header');
-      get_template_part('templates/header');
+      get_header();
     ?>
     <div id="contentwrapper">
       <?php get_template_part('templates/main-menu'); ?>
@@ -21,7 +20,7 @@ use Roots\Sage\Wrapper;
     </div>
     <?php
       do_action('get_footer');
-      get_template_part('templates/footer');
+      get_footer();
       wp_footer();
     ?>
   </body>
