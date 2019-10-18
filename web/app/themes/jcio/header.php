@@ -1,3 +1,4 @@
+<?php get_template_part('head'); ?>
 <div id="cookieDirective" style="display:none;"></div><a accesskey="s" href="#skipnav" class="skip" title="Skip Navigation">Skip Navigation</a>
 
 <div id="headerwrapper">
