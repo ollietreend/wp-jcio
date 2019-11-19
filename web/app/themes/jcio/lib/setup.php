@@ -4,8 +4,6 @@ namespace Roots\Sage\Setup;
 
 use Roots\Sage\Assets;
 
-require 'classes/moj-user-roles.php';
-
 /**
  * Theme setup
  */
@@ -98,8 +96,3 @@ function admin_bar_remove_comments() {
 add_action('wp_before_admin_bar_render', __NAMESPACE__ . '\\admin_bar_remove_comments');
 
 add_action('comments_open', '__return_false');
-
-/**
- * Define user roles
- */
-new \MOJ_User_Roles();
