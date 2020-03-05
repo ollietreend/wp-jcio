@@ -59,7 +59,8 @@
     "wpackagist-plugin/classic-editor": "*",
     "ministryofjustice/wp-user-roles": "*",
     "ministryofjustice/wp-rewrite-media-to-s3": "^0.1.0",
-    "ministryofjustice/wp-moj-components": "*"
+    "ministryofjustice/wp-moj-components": "*",
+    "ministryofjustice/cookie-compliance-for-wordpress": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
