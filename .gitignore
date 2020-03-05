@@ -1,4 +1,5 @@
 # Application
+web/.well-known/security.txt
 web/app/plugins/*
 !web/app/plugins/.gitkeep
 web/app/mu-plugins/*/
@@ -7,10 +8,13 @@ web/app/languages
 web/app/uploads/*
 !web/app/uploads/.gitkeep
 
-*.sql
-*.idea
+# PhpStorm
+.idea
 .DS_*
 ._DS_*
+
+*.sql
+*.idea
 
 # WordPress
 web/wp

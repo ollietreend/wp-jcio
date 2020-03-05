@@ -22,19 +22,19 @@
     "jquery": "^3.4.1"
   },
   "devDependencies": {
-    "ajv": "^6.10.0",
+    "ajv": "^6.12.0",
     "browser-sync": "^2.26.7",
     "browser-sync-webpack-plugin": "^2.0.1",
-    "cross-env": "^5.2.0",
-    "details-element-polyfill": "^2.0.1",
+    "cross-env": "^5.2.1",
+    "details-element-polyfill": "^2.4.0",
     "imagemin": "^6.1.0",
-    "laravel-mix": "^4.0.14",
+    "laravel-mix": "^4.1.4",
     "resolve-url-loader": "^2.3.1",
-    "sass": "^1.17.2",
-    "sass-loader": "^7.1.0",
+    "sass": "^1.26.2",
+    "sass-loader": "^7.3.1",
     "scrollpoints": "^0.4.0",
     "url-search-params-polyfill": "^4.0.0",
-    "vue-template-compiler": "^2.5.16"
+    "vue-template-compiler": "^2.6.11"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
