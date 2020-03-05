@@ -54,11 +54,13 @@
     "wpackagist-plugin/breadcrumb-navxt": "*",
     "wpackagist-plugin/mce-table-buttons": "*",
     "wpackagist-plugin/wordpress-seo": "*",
-    "wpackagist-plugin/google-analytics-dashboard-for-wp": "*",
+    "wpackagist-plugin/wp-analytify":"*",
+    "wpackagist-plugin/analytify-analytics-dashboard-widget":"*",
     "wpackagist-plugin/classic-editor": "*",
     "ministryofjustice/wp-user-roles": "*",
     "ministryofjustice/wp-rewrite-media-to-s3": "^0.1.0",
-    "ministryofjustice/wp-moj-components": "*"
+    "ministryofjustice/wp-moj-components": "*",
+    "ministryofjustice/cookie-compliance-for-wordpress": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"

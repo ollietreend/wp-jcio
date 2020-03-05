@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f24ef721c10b8a602c521e9019848fd9",
+    "content-hash": "a2210e290c3ca011a0ee13f578a29ae0",
     "packages": [
         {
             "name": "acf/advanced-custom-fields-pro",
@@ -312,6 +312,48 @@
             ],
             "description": "Install packages or a few files from packages into custom paths without overwriting existing stuff.",
             "time": "2018-02-04T10:52:01+00:00"
+        },
+        {
+            "name": "ministryofjustice/cookie-compliance-for-wordpress",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress.git",
+                "reference": "cb04cfb9e912d780f176747dbd6796fb0741f738"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.wp.dsd.io/dist/ministryofjustice/cookie-compliance-for-wordpress/ministryofjustice-cookie-compliance-for-wordpress-cb04cfb9e912d780f176747dbd6796fb0741f738-zip-d7164c.zip",
+                "reference": "cb04cfb9e912d780f176747dbd6796fb0741f738",
+                "shasum": "0c89ea4ab1046876a0aeed7c11377f46aa1e045c"
+            },
+            "require": {
+                "composer/installers": "^1.0"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "psr-4": {
+                    "CCFW\\": "./includes"
+                },
+                "classmap": [
+                    "includes/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Minstry of Justice",
+                    "email": "wordpress@digital.justice.gov.uk"
+                }
+            ],
+            "description": "WP plugin that presents visitor with a cookie consent banner and opt-out setting page.",
+            "support": {
+                "source": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/tree/1.3.2",
+                "issues": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues"
+            },
+            "time": "2019-12-23T20:06:00+00:00"
         },
         {
             "name": "ministryofjustice/wp-moj-components",
@@ -687,6 +729,24 @@
             "time": "2019-01-29T11:11:52+00:00"
         },
         {
+            "name": "wpackagist-plugin/analytify-analytics-dashboard-widget",
+            "version": "1.1.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/analytify-analytics-dashboard-widget/",
+                "reference": "tags/1.1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/analytify-analytics-dashboard-widget.1.1.2.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/analytify-analytics-dashboard-widget/"
+        },
+        {
             "name": "wpackagist-plugin/breadcrumb-navxt",
             "version": "6.4.0",
             "source": {
@@ -741,24 +801,6 @@
             "homepage": "https://wordpress.org/plugins/fast-user-switching/"
         },
         {
-            "name": "wpackagist-plugin/google-analytics-dashboard-for-wp",
-            "version": "6.0.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/",
-                "reference": "tags/6.0.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/google-analytics-dashboard-for-wp.6.0.1.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/google-analytics-dashboard-for-wp/"
-        },
-        {
             "name": "wpackagist-plugin/mce-table-buttons",
             "version": "3.3",
             "source": {
@@ -778,21 +820,39 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
-            "version": "13.0",
+            "version": "13.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/13.0"
+                "reference": "tags/13.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.13.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.13.2.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wordpress-seo/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-analytify",
+            "version": "3.0.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-analytify/",
+                "reference": "tags/3.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-analytify.3.0.0.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-analytify/"
         }
     ],
     "packages-dev": [
