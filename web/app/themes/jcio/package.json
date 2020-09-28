@@ -25,8 +25,8 @@
     "imagemin": "^7.0.1",
     "laravel-mix": "^5.0.5",
     "resolve-url-loader": "^3.1.1",
-    "sass": "^1.26.10",
-    "sass-loader": "^10.0.1",
+    "sass": "^1.26.11",
+    "sass-loader": "^10.0.2",
     "scrollpoints": "^0.4.0",
     "url-search-params-polyfill": "^8.1.0",
     "vue-template-compiler": "^2.6.12"
