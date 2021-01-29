@@ -1,3 +1,6 @@
+
+This site has been permanently decommissioned by the JOTW team, as of 29/01/2021.
+
 # Judicial Conduct Investigations Office
 
 Wordpress theme.
